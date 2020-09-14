@@ -360,5 +360,40 @@
     width: 100%;
     margin-bottom: 10px
 }
+.control {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    color: #fff;
+    text-align: center;
+    opacity: 0.5;
+    height: 50px;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, .5);
+}
+.circle {
+    position: relative;
+    left: 90%;
+    bottom: -43%;
+}
+.prev, .next {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
 
-/*# sourceMappingURL=style.min.css.map */
+}
+.fade {
+    animation-name:  fade;
+    animation-duration: 1.5s;
+    
+}
+@keyframes fade {
+    from {opacity: 0.1;}
+    to {opacity: 1;}
+}
+/*# sourceMapingURL=style.min.css.map */

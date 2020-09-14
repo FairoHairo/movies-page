@@ -14,6 +14,33 @@ const movieDB = {
 
 const adv = document.querySelectorAll('.promo__adv img');
 const advButton = document.querySelector('.removeAdv');
+const poster = document.querySelector('.promo__bg');
+const genre = poster.querySelector('.promo__genre');
+const movieList = document.querySelector('.promo__interactive-list'),
+        addForm = document.querySelector('form.add'),
+        addInput = addForm.querySelector('.adding__input'),
+        checkbox = addForm.querySelector('[type="checkbox"]'),
+        circle = document.querySelector('.circle'),
+            prevSlide = circle.querySelector('.prev'),
+            nextSlide = circle.querySelector('.next');
+
+
+// Slides
+circle.addEventListener('click', function(event) {
+    let target = event.target;
+    
+    if (target.classList.contains('next')) {
+        poster.style.backgroundImage = 'url("img/mars.webp")';
+        nextSlide.style.backgroundColor = 'black';
+        prevSlide.style.backgroundColor = 'inherit';
+    } else if (target.classList.contains('prev')) {
+        poster.style.backgroundImage = 'url("img/bg.jpg")';
+        nextSlide.style.backgroundColor = 'inherit';
+        prevSlide.style.backgroundColor = 'black';
+    } else {
+        return;
+    }
+});
 
 advButton.addEventListener('click', function() {
     advButton.querySelector('button').textContent = "Показать Рекламу";
@@ -28,20 +55,6 @@ advButton.addEventListener('click', function() {
     });
 
 });
-const poster = document.querySelector('.promo__bg');
-const genre = poster.querySelector('.promo__genre');
-
-genre.textContent = 'Драма';
-poster.style.backgroundImage = 'url("./img/bg.jpg")';
-
-const movieList = document.querySelector('.promo__interactive-list'),
-        addForm = document.querySelector('form.add'),
-        addInput = addForm.querySelector('.adding__input'),
-        checkbox = addForm.querySelector('[type="checkbox"]');
-
-movieList.innerHTML = "";
-
-
 
 movieDB.movies.forEach((film, i) => {
     movieList.innerHTML += `
@@ -115,7 +128,25 @@ function createMovieList(films, parent) {
         });
     });
 }
+// change slides after 5s
+function moveSlide() {
+    if ( poster.style.backgroundImage == 'url("img/mars.webp")' ) {
+        poster.classList.add('fade');
+        poster.style.backgroundImage = 'url("img/bg.jpg")';
+        setTimeout(function() {
+            poster.classList.remove('fade');
+        }, 1000);
+    } else {
+        poster.classList.add('fade');
+        poster.style.backgroundImage = 'url("img/mars.webp")';
+        setTimeout(function() {
+            poster.classList.remove('fade');
+        }, 1000);
+    }
+    
+}
 
+setInterval(moveSlide, 10000);
 
 makeChanges();
 createMovieList(movieDB.movies, movieList);
